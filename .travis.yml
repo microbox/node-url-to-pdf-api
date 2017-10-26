@@ -15,7 +15,10 @@ notifications:
 
 script:
   - git clone https://github.com/alvarcarto/url-to-pdf-api.git
-  - cd url-to-pdf-api && npm install --production && cd ..
+  - cd url-to-pdf-api
+  - ls -ahl
+  - npm install --production
+  - cd ..
 
 after_success:
   - export REPO=$TRAVIS_REPO_SLUG
