@@ -11,7 +11,7 @@ Microbox repackage alvarcarto's awesome url-to-pdf-api from the [latest source](
 
 ```bash
 # URL-to-PDF microservice will listen at container port 80
-docker run -d --name url2pdf  microbox/node-url-to-pdf-api
+docker run -d --name url2pdf -p 80:80 microbox/node-url-to-pdf-api
 ```
 
 #### Use URL-to-PDF service 
@@ -29,7 +29,7 @@ wget http://$URL2PDF/api/render?url=http://google.com google.pdf -O google.pdf
 docker stop url2pdf
 docker rm url2pdf
 docker pull microbox/node-url-to-pdf-api
-docker run -d --name url2pdf  microbox/node-url-to-pdf-api
+docker run -d --name url2pdf -p 80:80 microbox/node-url-to-pdf-api
 ```
 
 ### Name
@@ -42,6 +42,7 @@ docker run -d --name url2pdf  microbox/node-url-to-pdf-api
 
 ### Components
 
+- url-to-pdf-api 1.0.0
 - nodejs 8.8.1
 - puppeteer 0.11.0
 - chromium 63.0.3205.0 (r499413)
