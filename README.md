@@ -5,12 +5,22 @@ URL-to-PDF Microservice
 
 Web page PDF rendering done right. Self-hosted service for rendering receipts, invoices, or any content.
 
-Microbox repackage Gogs from the latest source and make it into a solid and easy-to-use docker image.
+Microbox repackage url-to-pdf-api from the [latest source](https://github.com/alvarcarto/url-to-pdf-api) and make it into a solid and easy-to-use docker image.
 
 #### Launch URL-to-PDF service 
 
+```bash
+# URL-to-PDF microservice will listen at container port 80
+docker run -d --name url2pdf  microbox/node-url-to-pdf-api
 ```
-docker run -d microbox/node-url-to-pdf-api --name url2pdf
+
+#### Use URL-to-PDF service 
+
+```bash
+# find ip of docker container
+export URL2PDF=`docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' url2pdf`
+# call api and download rendered pdf file
+wget http://$URL2PDF/api/render?url=http://google.com google.pdf -O google.pdf
 ```
 
 #### Upgrade to a newer version
@@ -19,7 +29,7 @@ docker run -d microbox/node-url-to-pdf-api --name url2pdf
 docker stop url2pdf
 docker rm url2pdf
 docker pull microbox/node-url-to-pdf-api
-docker run -d microbox/node-url-to-pdf-api --name url2pdf
+docker run -d --name url2pdf  microbox/node-url-to-pdf-api
 ```
 
 ### Name
@@ -40,4 +50,4 @@ docker run -d microbox/node-url-to-pdf-api --name url2pdf
 
 -  ~ 548MB MB
 
-PS: We will upgrade to alpine build which may decrease the size by 100M once 
+PS: chromium and it's dependencies took about 450MB!!!
