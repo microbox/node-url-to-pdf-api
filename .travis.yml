@@ -13,10 +13,15 @@ notifications:
     on_success: never
     on_failure: change
 
+branches:
+  only:
+  - master
+
 script:
   - git clone https://github.com/alvarcarto/url-to-pdf-api.git
   - cd url-to-pdf-api
   - ls -ahl
+  - "export PACKAGE_VERSION=$(cat package.json | grep version | head -1 | awk -F: '{ print $2 }' | sed 's/[\",]//g' | tr -d '[[:space:]]')"
   - npm install --production
   - cd ..
 
@@ -24,6 +29,7 @@ after_success:
   - export REPO=$TRAVIS_REPO_SLUG
   - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
   - docker build -t $REPO:$TAG .
+  - docker tag $REPO:$TAG $REPO:$PACKAGE_VERSION
   - docker images
   - docker login -u $DOCKER_USER -p $DOCKER_PASS
   - docker push $REPO
