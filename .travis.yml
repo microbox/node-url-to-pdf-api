@@ -6,7 +6,7 @@ services:
   - docker
 
 node_js:
-  - "6"
+  - "8"
 
 notifications:
   email:
@@ -14,7 +14,6 @@ notifications:
     on_failure: change
 
 script:
-  - wget https://nodejs.org/download/release/v6.11.4/node-v6.11.4-linux-x64.tar.gz
   - git clone https://github.com/alvarcarto/url-to-pdf-api.git
   - cd url-to-pdf-api && npm install --production && cd ..
 
