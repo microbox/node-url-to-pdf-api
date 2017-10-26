@@ -5,7 +5,7 @@ URL-to-PDF Microservice
 
 Web page PDF rendering done right. Self-hosted service for rendering receipts, invoices, or any content.
 
-Microbox repackage url-to-pdf-api from the [latest source](https://github.com/alvarcarto/url-to-pdf-api) and make it into a solid and easy-to-use docker image.
+Microbox repackage alvarcarto's awesome url-to-pdf-api from the [latest source](https://github.com/alvarcarto/url-to-pdf-api) and make it into a solid and easy-to-use docker image.
 
 #### Launch URL-to-PDF service 
 
