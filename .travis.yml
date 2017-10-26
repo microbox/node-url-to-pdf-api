@@ -1,0 +1,19 @@
+sudo: required
+
+services:
+  - docker
+
+notifications:
+  email:
+    on_success: never
+    on_failure: change
+
+script:
+  - wget https://nodejs.org/download/release/v6.11.4/node-v6.11.4-linux-x64.tar.gz
+  - export REPO=$TRAVIS_REPO_SLUG
+  - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
+  - docker build -t $REPO:$TAG .
+  - docker images
+  - docker login -u $DOCKER_USER -p $DOCKER_PASS
+  - docker push $REPO
+
