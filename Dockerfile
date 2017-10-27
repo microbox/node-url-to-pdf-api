@@ -1,6 +1,6 @@
-FROM microbox/node-chrome-headless:8.8.1
+FROM microbox/node-chrome-headless-shell:latest
 COPY url-to-pdf-api /root
-ENV NODE_ENV=production PORT=80 ALLOW_HTTP=true
+ENV NODE_ENV=production PORT=80 ALLOW_HTTP=true PUPPETEER_CHROMIUM_PATH=/chrome/headless_shell
 WORKDIR /root
 EXPOSE 80
-CMD ["/usr/lib/node-v8.8.1-linux-x64/bin/node", "src/index.js"]
+CMD ["/bin/node", "src/index.js"]
