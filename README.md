@@ -20,7 +20,7 @@ docker run -d --name url2pdf -p 80:80 microbox/node-url-to-pdf-api
 # find ip of docker container
 export URL2PDF=`docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' url2pdf`
 # call api and download rendered pdf file
-wget http://$URL2PDF/api/render?url=http://google.com google.pdf -O google.pdf
+wget http://$URL2PDF/api/render?url=https://github.com -O github.pdf
 ```
 
 #### Upgrade to a newer version
@@ -45,10 +45,10 @@ docker run -d --name url2pdf -p 80:80 microbox/node-url-to-pdf-api
 - url-to-pdf-api 1.0.0
 - nodejs 8.8.1
 - puppeteer 0.11.0
-- chromium 63.0.3205.0 (r499413)
+- chromium headless shell 63.0.3230.2
 
 ### Image Size
 
--  ~ 548MB MB
-
-PS: chromium and it's dependencies took about 450MB!!!
+- [x] Reduce image size from ~1.2GB to ~600MB (actual size 548MB)
+- [x] Reduce image size from ~548MB to ~350MB (actual size 286MB)
+- [ ] Reduce image size from ~286MB to ~100MB
