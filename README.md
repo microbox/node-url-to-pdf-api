@@ -53,4 +53,3 @@ docker run -d --name url2pdf -p 80:80 microbox/node-url-to-pdf-api
 ### TODO
 - [x] Reduce image size from ~1.2GB to ~600MB (actual size 548MB)
 - [x] Reduce image size from ~548MB to ~350MB (actual size 286MB)
-- [ ] Reduce image size from ~286MB to ~200MB
