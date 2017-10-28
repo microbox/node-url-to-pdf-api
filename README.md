@@ -23,6 +23,22 @@ export URL2PDF=`docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddre
 wget http://$URL2PDF/api/render?url=https://github.com -O github.pdf
 ```
 
+#### Install extra fonts
+
+When text is rendered by a computer, sometimes characters are displayed as 口 a.k.a “tofu”. They are little boxes to indicate your device doesn’t have a font to display the text.
+
+The answer to “tofu” is following:
+
+```bash
+docker exec -it url2pdf /bin/bash
+apt-get update
+apt-get install -yq fonts-symbola      # 🙄🙄🙄
+apt-get install -yq fonts-noto-cjk     # 囍, 언문, にほんご
+apt-get install -yq fonts-ocr-b        # PASSPORT FONT
+```
+
+“no more tofu” !!!
+
 #### Upgrade to a newer version
 
 ```
