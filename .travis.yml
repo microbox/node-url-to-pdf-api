@@ -18,7 +18,7 @@ branches:
   - master
 
 script:
-  - git clone https://github.com/e2tox/url-to-pdf-api.git
+  - git clone https://github.com/onesdk/url-to-pdf-api.git
   - cd url-to-pdf-api
   - ls -ahl
   - "export PACKAGE_VERSION=$(cat package.json | grep version | head -1 | awk -F: '{ print $2 }' | sed 's/[\",]//g' | tr -d '[[:space:]]')"
