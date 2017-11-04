@@ -62,7 +62,7 @@ docker run -d --name url2pdf -p 80:80 microbox/node-url-to-pdf-api
 ### Components
 
 - url-to-pdf-api 1.0.0
-- nodejs 8.8.1
+- nodejs 8.9.0
 - puppeteer 0.11.0
 - chromium headless shell 63.0.3230.2
 
