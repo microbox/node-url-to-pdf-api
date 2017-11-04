@@ -30,6 +30,7 @@ install:
   - docker version
   - docker login -u $DOCKER_USER -p $DOCKER_PASS
   - cd debian
+
   - git clone https://github.com/onesdk/url-to-pdf-api.git
   - cd url-to-pdf-api
   - ls -ahl
@@ -38,8 +39,10 @@ install:
   - npm install --production
   - rm -rf .git
   - cd ..
+
   - wget https://nodejs.org/download/release/v${NODE_VERSION}/node-v${NODE_VERSION}-linux-x64.tar.gz -O node-v${NODE_VERSION}-linux-x64.tar.gz
-  - tar -zxvf node-v${NODE_VERSION}-linux-x64.tar.gz && mv node-v${NODE_VERSION}-linux-x64 node-linux-x64
+  - tar -zxvf node-v${NODE_VERSION}-linux-x64.tar.gz
+  - mv node-v${NODE_VERSION}-linux-x64 node-linux-x64
   - cd ..
 
 script:
