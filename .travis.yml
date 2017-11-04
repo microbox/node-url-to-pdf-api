@@ -1,10 +1,6 @@
 sudo: required
 
 language: node_js
-
-services:
-  - docker
-
 node_js:
   - "8"
 
@@ -17,21 +13,43 @@ branches:
   only:
   - master
 
-script:
+before_install:
+  - git ls-remote --tags https://chromium.googlesource.com/chromium/src.git > ./TAGS
+  - export CHROMIUM_VERSION=`cat ./TAGS | grep refs | cut -d/ -f3 | sort -rn | head -1`
+  - echo $CHROMIUM_VERSION
+  - export NODE_VERSION=$(wget -qO- https://nodejs.org/dist/latest-v8.x/ | sed -nE 's|.*>node-v(.*)\.pkg</a>.*|\1|p')
+  - echo $NODE_VERSION
+  - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo ${TRAVIS_BRANCH} ; fi`
+  - echo $TAG
+  - export REPO=microbox/chrome-headless
+  - echo $REPO
+
+install:
+  - sudo curl -sSL https://get.docker.com/ | sh
+  - docker login -u $DOCKER_USER -p $DOCKER_PASS
+  - docker version
+  - docker login -u $DOCKER_USER -p $DOCKER_PASS
+  - cd debian
   - git clone https://github.com/onesdk/url-to-pdf-api.git
   - cd url-to-pdf-api
   - ls -ahl
   - "export PACKAGE_VERSION=$(cat package.json | grep version | head -1 | awk -F: '{ print $2 }' | sed 's/[\",]//g' | tr -d '[[:space:]]')"
   - export PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
   - npm install --production
+  - rm -rf .git
+  - cd ..
+  - wget https://nodejs.org/download/release/v${NODE_VERSION}/node-v${NODE_VERSION}-linux-x64.tar.gz -O node-v${NODE_VERSION}-linux-x64.tar.gz
+  - tar -zxvf node-v${NODE_VERSION}-linux-x64.tar.gz && mv node-v${NODE_VERSION}-linux-x64 node-linux-x64
   - cd ..
 
+script:
+  - docker build -t debian-build --build-arg CHROMIUM_VERSION=$CHROMIUM_VERSION debian-build
+  - export CID=$(docker create debian-build)
+  - docker cp $CID:/chromium.tar debian
+  - docker build -t $REPO:$TAG -t $REPO:$PACKAGE_VERSION --build-arg CHROMIUM_VERSION=$CHROMIUM_VERSION --build-arg NODE_VERSION=$NODE_VERSION debian
+
 after_success:
-  - export REPO=$TRAVIS_REPO_SLUG
-  - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
-  - docker build -t $REPO:$TAG .
-  - docker tag $REPO:$TAG $REPO:$PACKAGE_VERSION
   - docker images
-  - docker login -u $DOCKER_USER -p $DOCKER_PASS
-  - docker push $REPO
+  - docker push $REPO:$TAG
+  - docker push $REPO:$PACKAGE_VERSION
 
