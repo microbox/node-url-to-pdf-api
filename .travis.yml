@@ -21,7 +21,7 @@ before_install:
   - echo $NODE_VERSION
   - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo ${TRAVIS_BRANCH} ; fi`
   - echo $TAG
-  - export REPO=microbox/chrome-headless
+  - export REPO=$TRAVIS_REPO_SLUG
   - echo $REPO
 
 install:
