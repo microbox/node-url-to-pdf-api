@@ -17,7 +17,7 @@ before_install:
   #- git ls-remote --tags https://chromium.googlesource.com/chromium/src.git > ./TAGS
   #- export CHROMIUM_VERSION=`cat ./TAGS | grep refs | cut -d/ -f3 | sort -rn | head -1`
   # use stable chromium version
-  - export CHROMIUM_VERSION=64.0.3253.3
+  - export CHROMIUM_VERSION=64.0.3259.1
   - echo $CHROMIUM_VERSION
   - export NODE_VERSION=$(wget -qO- https://nodejs.org/dist/latest-v8.x/ | sed -nE 's|.*>node-v(.*)\.pkg</a>.*|\1|p')
   - echo $NODE_VERSION
