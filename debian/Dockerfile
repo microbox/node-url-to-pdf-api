@@ -7,7 +7,7 @@ MAINTAINER Ling <x@e2.to>
 RUN apt-get update -y && apt-get install -yq fontconfig fonts-dejavu && rm -rf /var/lib/apt/lists/*
 
 ADD   node-v${NODE_VERSION}-linux-x64/bin/node    /bin
-COPY  url-to-pdf-api                              /home/chromium
+COPY  url-to-pdf-api                              /root
 
 ENV CHROMIUM_VERSION=$CHROMIUM_VERSION \
     NODE_VERSION=$NODE_VERSION \
