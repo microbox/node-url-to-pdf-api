@@ -14,7 +14,7 @@ ENV CHROMIUM_VERSION=$CHROMIUM_VERSION \
     NODE_ENV=production \
     PORT=80 \
     ALLOW_HTTP=true \
-    PUPPETEER_CHROMIUM_PATH=/usr/lib/chromium/headless_shell
+    PUPPETEER_CHROMIUM_PATH=/bin/chromium
 
 EXPOSE 80
 
