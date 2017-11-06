@@ -8,7 +8,7 @@ Web page PDF rendering done right. Self-hosted service for rendering receipts, i
 Microbox repackage alvarcarto's awesome url-to-pdf-api from the [latest source](https://github.com/alvarcarto/url-to-pdf-api) and make it into a solid and easy-to-use docker image.
 
 ### Image Size
-- 286MB (smaller than alpine chromium image size 311MB)
+- 266MB (smaller than alpine chromium image size 311MB)
 
 #### Launch URL-to-PDF service 
 
